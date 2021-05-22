@@ -18,7 +18,6 @@ urlpatterns =[
     path('cardde/',views.carddetails,name="cardde"),
     path('addcart/<int:id>/',views.addcart,name="addcart"),
     path('remove/<int:id>/',views.remove,name="remove"),
-    path('yourpro/',views.yourproducts,name="yrpro"),
     path('rlrq',views.rolreq,name='rr'),
     path('category/',views.addcategory,name="addcategory"),
 

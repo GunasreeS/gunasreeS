@@ -1,23 +1,20 @@
-{% extends 'html/head.html' %}
-{% block title %}Role Request {% endblock %}
+{% extends 'services/base.html' %}
+{% block title %}Add category{% endblock %}
 {% block content %}
-<div class="container mt-5">
-	<div class="card col-md-6 mx-auto">
-		<div class="card-body">
-		
+<div class="container">
+	<div class="card col-md-6 mt-4 mx-auto shadow-lg">
+		<h3 class="text-white text-center p-3 mt-3" style="background-color:green">Add category</h3>
 		<form method="POST">
 			{% csrf_token %}
-			<h3>Role Request Form</h3>
-			{% for m in a %}
+			<table class="table table-borderless">
+				{% for k in c %}
 				<tr>
-					<td>{{m}}</td>
+					<td>{{k}}</td>
 				</tr>
 				{% endfor %}
-				<input type="submit" value="Access Role" class="btn btn-success col-sm my-2 ">
+			</table>
+			<input type="submit" name="submit" class="btn btn-success btn-block">
 		</form>
-			</div>
 	</div>
-	
 </div>
-
 {% endblock %}

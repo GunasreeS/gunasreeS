@@ -14,9 +14,8 @@ def home(req):
 
 
 def store(req):
-	d=Category.objects.all()
 	data=Product.objects.all()
-	return render(req,'html/store.html',{'info':data,'cat':d})
+	return render(req,'html/store.html',{'info':data})
 
 def cart(request):
 	a=Cart.objects.filter(user_id=request.user.id)
@@ -25,7 +24,7 @@ def cart(request):
 	for i in a:
 		count=count+1
 		sum=sum+i.product.price
-	return render(request,'html/cart.html',{'info':a,'sum':sum,'count':count})
+	return render(request,'html/cart.html',{'info':a})
 
 def checkout(req):
 	return render(req,'html/checkout.html')
@@ -61,20 +60,20 @@ def product(request):
 		j=ProductForm(request.POST,request.FILES)
 		if j.is_valid():
 			i=j.save(commit=False)
-			i.pid_id=request.user.id
+			i.uid_id=request.user.id
 			i.save()
 	j=ProductForm()
-	k=Product.objects.filter(pid_id=request.user.id)
+	k=Product.objects.all()
 	return render(request,'html/product.html',{'u':j,'info':k})
 
-def joinus(request):
-	if request.method=="POST":
-		a=Sellerform(request.POST,request.FILES)
+def joinus(req):
+	if req.method=="POST":
+		a=Sellerform(req.POST,req.FILES)
 		if a.is_valid():
 			a.save()
 			return redirect('/store')
 	a=Sellerform()
-	return render(request,'html/joinus.html',{'s':a})
+	return render(req,'html/joinus.html',{'s':a})
 
 def deletedata(req,id):
 	data=Product.objects.get(id=id)
@@ -82,8 +81,7 @@ def deletedata(req,id):
 	return redirect('/product')
 
 def sellerdetails(req):
-	d=Seller.objects.all()
-	return render(req,'html/sellerdetails.html',{'sell':d})
+	return render(req,'html/sellerdetails.html')
 
 def carddetails(req):
 	return render(req,'html/cartdetails.html')

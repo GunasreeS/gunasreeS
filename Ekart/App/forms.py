@@ -26,7 +26,7 @@ class UsForm(UserCreationForm):
 class ProductForm(forms.ModelForm):
 	class Meta:
 		model=Product
-		fields=['category','itemname','price','quantity','image']
+		fields=['category','itemname','price','image']
 		widgets={
 		"category":forms.TextInput(attrs={
 			"class":"form-control",
@@ -35,10 +35,6 @@ class ProductForm(forms.ModelForm):
 		"itemname":forms.TextInput(attrs={
 			"class":"form-control",
 			"placeholder":"itemname",
-			}),
-		"quantity":forms.NumberInput(attrs={
-			"class":"form-control",
-			"placeholder":"quantity",
 			}),
 		"price":forms.NumberInput(attrs={
 			"class":"form-control",
@@ -50,16 +46,22 @@ class ProductForm(forms.ModelForm):
 class Sellerform(forms.ModelForm):
 	class Meta:
 		model=Seller
-		fields='__all__'
-
-class CategoryForm(forms.ModelForm):
-	class Meta:
-		model=Category
-		fields=["cname"]
+		fields=['name','phoneno','email','address','image']
 		widgets={
-		"cname":forms.TextInput(attrs={"class":"form-control","placeholder":"enter cname"}),
+		"name":forms.TextInput(attrs={
+			"class":"form-control",
+			"placeholder":"name"
+			}),
+		"phoneno":forms.NumberInput(attrs={
+			"class":"form-control",
+			"placeholder":"phoneno"
+			}),
+		"email":forms.EmailInput(attrs={
+			"class":"form-control",
+			"placeholder":"email"
+			}),
+		"address":forms.TextInput(attrs={"class":"form-control","placeholder":"address","required":True})
 		}
-
 
 class CartForm(forms.ModelForm):
 	class Meta:
@@ -75,6 +77,15 @@ class CartForm(forms.ModelForm):
 			"placeholder":"itemname",
 			}),
 		}
+
+class CategoryForm(forms.ModelForm):
+	class Meta:
+		model=Category
+		fields=["cname"]
+		widgets={
+		"cname":forms.TextInput(attrs={"class":"form-control","placeholder":"enter cname"}),
+		}
+
 class RoleR(forms.ModelForm):
 	class Meta:
 		model = RoleRest
@@ -87,4 +98,6 @@ class RoleR(forms.ModelForm):
 
 
 		}
-		
+
+
+ 		

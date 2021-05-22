@@ -3,21 +3,8 @@ from django.contrib.auth.models import User,AbstractUser
 
 # Create your models here.
 class User(AbstractUser):
-	t = (
-		(1,'seller'),
-		(2,'customer'),
-		(3,'guest'),
-		)
-	role = models.IntegerField(default=3,choices=t)
-	g=[('M',"Male"),('F','Female')]
-	age=models.IntegerField(default=10)
-	impf=models.ImageField(upload_to='Profiles/',default="Note.jpg")
-	gender=models.CharField(max_length=10,choices=g)
-	first_name=models.CharField(max_length=100)
-	last_name=models.CharField(max_length=100)
-	phone_no=models.IntegerField(null=True)
-	car_regno=models.CharField(max_length=20)
-	address=models.CharField(max_length=200)
+	t=[(1,'customer'),(2,'seller'),(3,'guest')]
+	role=models.CharField(max_length=10,choices=t)
 
 
 class Customer(models.Model):
@@ -33,7 +20,6 @@ class Product(models.Model):
 	category=models.CharField(max_length=200,null=True)
 	itemname=models.CharField(max_length=200,null=True)
 	price= models.FloatField()
-	quantity=models.IntegerField(default=0)
 	image=models.ImageField(null=True,blank=True)
 
 	def __str__(self):
@@ -73,22 +59,22 @@ class credit(models.Model):
 	monyer=models.DateTimeField(null=False)
 
 class Seller(models.Model):
-	t=[(2,'seller')]
 	name=models.CharField(max_length=40,null=True)
-	email=models.EmailField(max_length=100,null=True)
-	roletype=models.PositiveIntegerField(choices=t,null=True)
+	phoneno=models.IntegerField()
+	email=models.CharField(max_length=100,null=True)
 	address=models.CharField(max_length=200,null=True)
 	image=models.ImageField(null=False)
+
+
+class Cart(models.Model):
+	user=models.ForeignKey(User,on_delete=models.CASCADE)
+	product=models.ForeignKey(Product,on_delete=models.CASCADE)
 
 class Category(models.Model):
 	cname=models.CharField(max_length=20)
 	def __str__(self):
 		return self.cname
 
-
-class Cart(models.Model):
-	user=models.ForeignKey(User,on_delete=models.CASCADE)
-	product=models.ForeignKey(Product,on_delete=models.CASCADE)
 class RoleRest(models.Model):
 	t=[(1,'seller'),(2,'customer')]
 	uname= models.CharField(max_length=30)
