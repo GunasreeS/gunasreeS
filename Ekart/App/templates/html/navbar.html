@@ -1,0 +1,118 @@
+{% load static %}
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <!-- Brand/logo -->
+   <a class="navbar-brand" href="#">
+    <img src="{% static 'images/shop.jpg' %}"  style="width:40px;">
+  </a>
+  <a class="navbar-brand" href="{% url 'home' %}">Ekart</a>
+  
+  <!-- Links -->
+  {% if user.is_superuser %}
+   <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link"  href="{% url 'store' %}">Shop</a>
+    </li>
+     <a type="button" class="nav-link dropdown-toggle" data-toggle="dropdown">select category
+  </a>
+
+   <ul class="navbar-nav">
+  <div class="dropdown-menu">
+   
+    {% for i in data %}
+    <li>
+      
+       <a href="{% url 'sr' i.id %}" class="dropdown-item">{{i.cname}}</a>
+  
+     </li>
+      {% endfor %}
+ 
+    <li class="nav-item">
+      <a class="nav-link"  href="{% url 'join' %}">joinus</a>
+    </li>
+    <li class="nav-item">
+          <a class="nav-link" href="{% url 'addcategory' %}">Addcartegory</a>
+        </li>
+        
+    <li class="nav-item">
+      <a class="nav-link"  href="{% url 'product' %}">Add product</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link"  href="{% url 'yrpro' %}">yourproducts</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-link"  href="{% url 'seller' %}">seller details</a>
+    </li>
+     <li class="nav-item">
+        <a class="nav-link" href="{% url 'rr' %}">Role request</a>
+      </li>
+     
+  </ul>
+  <ul class="navbar-nav ml-auto" style="margin-right: 180px">
+    <li class="dropdown">
+      <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">{{request.user.username}}</a>
+    <div class="dropdown-menu">
+      <a class="dropdown-item"  href="{% url 'logo' %}">Logout</a>
+    </div>
+    </li>
+     <li class="nav-item">
+        <a class="nav-link" href="{% url 'carts' %}">{{count}}cart</a>
+      </li>
+     
+</ul>
+    {% elif user.is_authenticated %}
+    <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link"  href="{% url 'store' %}">Shop</a>
+    </li>
+     <a type="button" class="nav-link dropdown-toggle" data-toggle="dropdown">select category
+  </a>
+
+   <ul class="navbar-nav">
+  <div class="dropdown-menu">
+   
+    {% for i in data %}
+    <li>
+      
+       <a href="{% url 'sr' i.id %}" class="dropdown-item">{{i.cname}}</a>
+  
+     </li>
+      {% endfor %}
+ 
+    <li class="nav-item">
+      <a class="nav-link"  href="{% url 'join' %}">joinus</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link"  href="{% url 'product' %}">Add product</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link"  href="{% url 'yrpro' %}">yourproducts</a>
+    </li>
+    
+    
+ </ul>
+  <ul class="navbar-nav ml-auto" style="margin-right: 180px">
+    <li class="dropdown">
+      <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">{{request.user.username}}</a>
+    <div class="dropdown-menu">
+      <a class="dropdown-item"  href="{% url 'logo' %}">Logout</a>
+    </div>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'carts' %}">{{count}}cart</a>
+      </li>
+      
+
+  </ul>
+    {% else %}
+    <ul class="navbar-nav ml-auto" style="margin-right: 180px">
+    <li class="nav-item">
+      <a class="nav-link"  href="{% url 'lg' %}">Login</a>
+    </li>
+       <li class="nav-item">
+        <a class="nav-link" href="{% url 'carts' %}">cart:{{count}}</a>
+      </li>
+   
+    </ul>
+      {% endif %}
+</nav>

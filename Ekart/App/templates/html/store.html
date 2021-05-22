@@ -1,0 +1,30 @@
+
+{% extends 'html/head.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+{% load static %}
+<div class="row">
+
+		{% for i in info %}
+		<div class="col-lg-2">
+	
+		<img class="thumbnail" src="{{i.image.url}}" height="300px" width="100%">
+	<div class="box-element product">
+		<h6>{{i.itemname}}</h6>
+		<hr>
+		<a class="btn btn-info" href="#">View</a>
+		<h4>price: {{i.price}}</h4>
+		<h2>{{i.id}}</h2>
+		<form method="POST" action="{% url 'addcart' i.id %}">
+			{% csrf_token %}
+			<input type="submit" value="Add to cart" class="form-control my-2 col-sm btn btn-success">
+		</form>
+		
+		
+
+	</div>
+    </div>
+
+    {% endfor %}
+</div>	
+{% endblock %}
